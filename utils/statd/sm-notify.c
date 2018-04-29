@@ -368,8 +368,8 @@ smn_bind_address(const char *srcaddr, const char *srcport)
 		hint.ai_flags |= AI_PASSIVE;
 
 	/* Do not allow "node" and "service" parameters both to be NULL */
-	if (srcport == NULL)
-		error = getaddrinfo(srcaddr, "", &hint, &ai);
+	if (srcaddr == NULL && srcport == NULL)
+		error = getaddrinfo("0.0.0.0", srcport, &hint, &ai);
 	else
 		error = getaddrinfo(srcaddr, srcport, &hint, &ai);
 	if (error != 0) {
